@@ -1,53 +1,49 @@
-type FetchFunction = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
+type Fetch = typeof window.fetch;
 
-type FetchOptions = RequestInit & { url: string; };
+export type RequestOptions = RequestInit & { url: string; };
 
-type FetchInterceptors = {
+export type RequestInterceptors = {
   onError?: (reason?: Error) => Promise<never>,
   onRequestError?: (reason?: Error) => Promise<never>,
   onResponseError?: (reason?: Error) => Promise<never>
 };
 
-type FetchFactory = {
+const createRequest: {
   <R = Response> (
-    fetch: FetchFunction, interceptors?: FetchInterceptors & {
+    fetch: Fetch, interceptors?: RequestInterceptors & {
       onResponse: (response: Response) => R | PromiseLike<R>
     }
-  ): (...params: [FetchOptions]) => Promise<R>;
+  ): (...params: [RequestOptions]) => Promise<R>;
   <A extends any[]> (
-    fetch: FetchFunction, interceptors?: FetchInterceptors & {
-      onRequest: (...params: A) => FetchOptions
+    fetch: Fetch, interceptors?: RequestInterceptors & {
+      onRequest: (...params: A) => RequestOptions
     }
   ): (...params: A) => Promise<Response>;
   <A extends any[], R = Response> (
-    fetch: FetchFunction, interceptors?: FetchInterceptors & {
-      onRequest: (...params: A) => FetchOptions,
+    fetch: Fetch, interceptors?: RequestInterceptors & {
+      onRequest: (...params: A) => RequestOptions,
       onResponse: (response: Response) => R | PromiseLike<R>
     }
   ): (...params: A) => Promise<R>;
-};
-
-const factory: FetchFactory = (
-  fetch: FetchFunction, {
+} = (
+  fetch: Fetch, {
     onError = (reason) => Promise.reject(reason),
-    onRequest = (...params: [FetchOptions, ...any[]]) => params[0],
+    onRequest = (...params: [RequestOptions]) => params[0],
     onRequestError = onError,
     onResponse = (response): Promise<Response> => Promise.resolve(response),
     onResponseError = onError
   } = {}
-) => {
-  return (...params: [FetchOptions, ...any[]]): Promise<Response> => {
-    try {
-      const { url, ...options } = onRequest(...params);
-      return (
-        fetch(url, options)
-          .then(onResponse)
-          .catch(onResponseError)
-      );
-    } catch (reason) {
-      return onRequestError(reason);
-    }
-  };
-}
+) => (...params: [RequestOptions]): Promise<Response> => {
+  try {
+    const { url, ...options } = onRequest(...params);
+    return (
+      fetch(url, options)
+        .then(onResponse)
+        .catch(onResponseError)
+    );
+  } catch (reason) {
+    return onRequestError(reason);
+  }
+};
 
-export default factory;
+export default createRequest;
