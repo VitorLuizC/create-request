@@ -1,7 +1,14 @@
 {
   "name": "intereq",
   "version": "0.0.0",
-  "main": "src/index.ts",
+  "cdn": "dist/intereq.js",
+  "main": "dist/intereq.cjs.js",
+  "types": "dist/intereq.d.ts",
+  "unpkg": "dist/intereq.js",
+  "module": "dist/intereq.es.js",
+  "jsdelivr": "dist/intereq.js",
+  "umd:main": "dist/intereq.js",
+  "files": ["dist/"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && bili src/intereq.js --format es,cjs,umd,umd-min"
