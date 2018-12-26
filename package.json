@@ -11,7 +11,7 @@
   "files": ["dist/"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && bili src/intereq.js --format es,cjs,umd,umd-min"
+    "build": "tsc && bili src/intereq.js --format es,cjs,umd,umd-min --js buble"
   },
   "repository": {
     "type": "git",

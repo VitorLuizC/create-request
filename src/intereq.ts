@@ -9,12 +9,6 @@ export type RequestInterceptors = {
 };
 
 const createRequest: {
-  (
-    fetch: Fetch, interceptors?: RequestInterceptors & {
-      onRequest?: (...params: [RequestOptions]) => RequestOptions,
-      onResponse?: (response: Response) => Response | PromiseLike<Response>,
-    }
-  ): (...params: [RequestOptions]) => Promise<Response>;
   <R = Response> (
     fetch: Fetch, interceptors?: RequestInterceptors & {
       onResponse: (response: Response) => R | PromiseLike<R>
@@ -33,17 +27,21 @@ const createRequest: {
   ): (...params: A) => Promise<R>;
 } = (
   fetch: Fetch, {
-    onError = (reason) => Promise.reject(reason),
-    onRequest = (...params: [RequestOptions]) => params[0],
+    onError = (reason?: Error) => Promise.reject(reason),
+    onRequest = (options: RequestOptions) => options,
     onRequestError = onError,
-    onResponse = (response): Promise<Response> => Promise.resolve(response),
+    onResponse = (response: Response): Promise<Response> => Promise.resolve(response),
     onResponseError = onError
+  }: RequestInterceptors & {
+    onRequest?: (...params: [RequestOptions]) => RequestOptions,
+    onResponse?: (response: Response) => Response | PromiseLike<Response>,
   } = {}
-) => (...params: [RequestOptions]): Promise<Response> => {
+) => function (): Promise<Response> {
+  const params = arguments as unknown as [RequestOptions];
   try {
-    const { url, ...options } = onRequest(...params);
+    const options = onRequest.apply(null, params) as RequestOptions;
     return (
-      fetch(url, options)
+      fetch(options.url, options)
         .then(onResponse)
         .catch(onResponseError)
     );
