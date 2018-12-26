@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VitorLuizC/req.git"
+    "url": "git+https://github.com/VitorLuizC/intereq.git"
   },
   "author": {
     "url": "https://vitorluizc.github.io/",
@@ -24,9 +24,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/VitorLuizC/req/issues"
+    "url": "https://github.com/VitorLuizC/intereq/issues"
   },
-  "homepage": "https://github.com/VitorLuizC/req#readme",
+  "homepage": "https://github.com/VitorLuizC/intereq#readme",
   "devDependencies": {
     "bili": "^3.4.2",
     "typescript": "^3.2.2"
