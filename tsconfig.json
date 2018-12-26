@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2018",
     "lib": ["es2018", "dom"],
-
-    // Output configuration
-    "outDir": "dist",
+    "target": "esnext",
+    "module": "esnext",
 
     // Declaration configuration
     "declaration": true,
     "declarationDir": "dist/"
   },
-  "files": ["src/create-request.ts"]
+  "files": ["src/intereq.ts"]
 }

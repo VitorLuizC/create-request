@@ -1,10 +1,10 @@
 {
-  "name": "create-request",
+  "name": "intereq",
   "version": "0.0.0",
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && bili dist/create-request.js --format es,cjs,umd,umd-min"
+    "build": "tsc && bili src/intereq.js --format es,cjs,umd,umd-min"
   },
   "repository": {
     "type": "git",

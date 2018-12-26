@@ -14,3 +14,7 @@ npm-lockfile.json
 # Log's files.
 *.log
 *.log.*
+
+# Generated source files.
+dist/
+src/intereq.js
