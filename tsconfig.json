@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "lib": ["es2018", "dom"],
+
+    // Output configuration
+    "outDir": "dist",
+
+    // Declaration configuration
+    "declaration": true,
+    "declarationDir": "dist/"
+  },
+  "files": ["src/create-request.ts"]
+}

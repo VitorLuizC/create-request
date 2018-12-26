@@ -9,6 +9,12 @@ export type RequestInterceptors = {
 };
 
 const createRequest: {
+  (
+    fetch: Fetch, interceptors?: RequestInterceptors & {
+      onRequest?: (...params: [RequestOptions]) => RequestOptions,
+      onResponse?: (response: Response) => Response | PromiseLike<Response>,
+    }
+  ): (...params: [RequestOptions]) => Promise<Response>;
   <R = Response> (
     fetch: Fetch, interceptors?: RequestInterceptors & {
       onResponse: (response: Response) => R | PromiseLike<R>
