@@ -25,6 +25,8 @@ yarn add intereq
 
 `intereq` is curry function, which applies interceptors to `fetch` and returns a new request function.
 
+### Request GraphQL Example
+
 ```js
 import intereq from 'intereq';
 
