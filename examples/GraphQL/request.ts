@@ -1,4 +1,4 @@
-import createRequest from '../';
+import createRequest from '../../';
 
 type GraphQLResponse = {
   data?: null | { [graph: string]: any; };
