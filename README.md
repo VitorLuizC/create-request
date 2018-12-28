@@ -57,35 +57,47 @@ request('POST', '/user', {
 ### Interceptors
 
 - **`onError`**
+
   ```ts
   onError?: (reason?: Error) => Promise<never>;
   ```
+
   Handle request and response errors.
 
 - **`onRequest`**
+
   ```ts
   onRequest?: <A extends any[] = [RequestOptions]>(...params: A) => RequestOptions;
   ```
-  Handle request and define request arguments.
-  ![](https://user-images.githubusercontent.com/9027363/50517033-52f98580-0a95-11e9-9deb-0f63e9f56dbf.gif)
+
+  Handle request and define request arguments. `A` generic type defines returned `request` function arguments type.
+
+  ![`onRequest` GIF](https://user-images.githubusercontent.com/9027363/50517033-52f98580-0a95-11e9-9deb-0f63e9f56dbf.gif)
 
 - **`onRequestError`**
+
   ```ts
   onRequestError?: (reason?: Error) => Promise<never>;
   ```
+
   Handle request errors. Overwrites `onError` handling request errors.
 
 - **`onResponse`**
+
   ```ts
   onResponse?: <R = Response>(response: R) => R | PromiseLike<R>;
   ```
-  Handle response and define the request return.
-  ![](https://user-images.githubusercontent.com/9027363/50516780-e92cac00-0a93-11e9-963f-c59095af655a.gif)
+
+  Handle response and define the request return. `R` generic type defines returned `request` function result type.
+
+  ![`onResponse` GIF](https://user-images.githubusercontent.com/9027363/50516780-e92cac00-0a93-11e9-963f-c59095af655a.gif)
 
 - **`onResponseError`**
+
   ```ts
   onResponseError?: (reason?: Error) => Promise<never>;
   ```
+
   Handle response errors. Overwrites `onError` handling response errors.
 
 ### Usage on unsupported browsers
