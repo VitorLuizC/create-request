@@ -25,51 +25,33 @@ yarn add intereq
 
 `intereq` is curry function, which applies interceptors to `fetch` and returns a new request function.
 
-### Request GraphQL Example
-
-```js
+```ts
 import intereq from 'intereq';
 
-// ...
+type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 const request = intereq(window.fetch, {
-  onRequest: (query, variables = {}) => ({
-    url: 'https://api.github.com/graphql',
-    body: JSON.stringify({ query, variables }),
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ... token() && {
-        'Authorization': `Bearer ${token()}`
-      }
-    }
+  onRequest: (method: Method, route: string, data: any = undefined) => ({
+    url: 'https://api.example.com' + route,
+    body: JSON.stringify(data),
+    method,
+    headers: { 'Content-Type': 'application/json' }
   }),
-  onResponse: async (response) => {
-    const { data, errors = [] } = await response.json();
-    if (data === null && errors.length > 0)
-      throw new Error(errors[0].message);
-    return data;
+  onResponse: (response: Response) => {
+    if (response.status === 403)
+      throw new Error('Authorization error.');
+    return response.json();
   },
-  onError: (error) => {
+  onError: (error:? Error) => {
     sentry.captureException(error);
     return Promise.reject(message);
   }
 });
 
-/**
- * Created `request` function usage.
- */
-const getUsername = async () => {
-  const response = await request(/* GraphQL */`
-    query {
-      user: viewer {
-        username: login
-      }
-    }
-  `);
-
-  console.log(response.user.username);
-};
+request('POST', '/user', {
+  name: 'Vitor'
+})
+  .then((response) => response.success && alert('User was created!'));
 ```
 
 ### Interceptors
@@ -85,6 +67,7 @@ const getUsername = async () => {
   onRequest?: <A extends any[] = [RequestOptions]>(...params: A) => RequestOptions;
   ```
   Handle request and define request arguments.
+  ![](https://user-images.githubusercontent.com/9027363/50517033-52f98580-0a95-11e9-9deb-0f63e9f56dbf.gif)
 
 - **`onRequestError`**
   ```ts
@@ -97,6 +80,7 @@ const getUsername = async () => {
   onResponse?: <R = Response>(response: R) => R | PromiseLike<R>;
   ```
   Handle response and define the request return.
+  ![](https://user-images.githubusercontent.com/9027363/50516780-e92cac00-0a93-11e9-963f-c59095af655a.gif)
 
 - **`onResponseError`**
   ```ts
