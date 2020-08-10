@@ -1,13 +1,7 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "strict": true,
-    "lib": ["es2018", "dom"],
-    "target": "esnext",
-    "module": "esnext",
-
-    // Declaration configuration
-    "declaration": true,
-    "declarationDir": "dist/"
-  },
-  "files": ["src/intereq.ts"]
+    // ECMAScript library settings
+    "lib": ["ES5", "DOM", "ES2015.Promise"]
+  }
 }

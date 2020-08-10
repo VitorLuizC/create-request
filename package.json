@@ -2,17 +2,22 @@
   "name": "intereq",
   "version": "1.1.0",
   "description": "Apply interceptors to `fetch` and create a custom request function.",
-  "cdn": "dist/intereq.js",
-  "main": "dist/intereq.cjs.js",
-  "types": "dist/intereq.d.ts",
-  "unpkg": "dist/intereq.js",
-  "module": "dist/intereq.es.js",
-  "jsdelivr": "dist/intereq.js",
-  "umd:main": "dist/intereq.js",
-  "files": ["dist/"],
+  "cdn": "dist/index.umd.min.js",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "unpkg": "dist/index.umd.min.js",
+  "module": "dist/index.esm.js",
+  "jsdelivr": "dist/index.umd.min.js",
+  "umd:main": "dist/index.umd.js",
+  "files": [
+    "dist/",
+    "types/"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && bili src/intereq.js --format es,cjs,umd,umd-min --module-name intereq --minimal"
+    "build": "pnpm run build:transpile && pnpm run build:bundle",
+    "build:transpile": "tsc --project ./tsconfig.build.json",
+    "build:bundle": "rollup --config rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -46,6 +51,8 @@
   "homepage": "https://github.com/VitorLuizC/intereq#readme",
   "devDependencies": {
     "bili": "^4.8.1",
+    "rollup": "^2.23.1",
+    "rollup-plugin-terser": "^7.0.0",
     "typescript": "^3.5.3"
   }
 }
