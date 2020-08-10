@@ -1,5 +1,6 @@
 devDependencies:
   bili: 4.10.1
+  prettier: 2.0.5
   rollup: 2.23.1
   rollup-plugin-terser: 7.0.0_rollup@2.23.1
   typescript: 3.9.7
@@ -2552,6 +2553,13 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-03eXong5NLnNCD05xscnGKGDZ98CyzoqPSMjOe6SuoQY7Z2hIj0Ld1g/O/UQRuOle2aRtiIRDg9tDcTGAkLfKw==
+  /prettier/2.0.5:
+    dev: true
+    engines:
+      node: '>=10.13.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
   /promise.series/0.2.0:
     dev: true
     engines:
@@ -3068,6 +3076,7 @@ packages:
       integrity: sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
 specifiers:
   bili: ^4.8.1
+  prettier: ^2.0.5
   rollup: ^2.23.1
   rollup-plugin-terser: ^7.0.0
   typescript: ^3.5.3

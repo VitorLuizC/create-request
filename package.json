@@ -14,7 +14,9 @@
     "types/"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "prettier --check \"./{src,examples}/**/*.ts\"",
+    "lint:fix": "prettier --write \"./{src,examples}/**/*.ts\"",
+    "test": "pnpm run lint && echo \"Error: no test specified\" && exit 1",
     "build": "pnpm run build:transpile && pnpm run build:bundle",
     "build:transpile": "tsc --project ./tsconfig.build.json",
     "build:bundle": "rollup --config rollup.config.js"
@@ -51,6 +53,7 @@
   "homepage": "https://github.com/VitorLuizC/intereq#readme",
   "devDependencies": {
     "bili": "^4.8.1",
+    "prettier": "^2.0.5",
     "rollup": "^2.23.1",
     "rollup-plugin-terser": "^7.0.0",
     "typescript": "^3.5.3"

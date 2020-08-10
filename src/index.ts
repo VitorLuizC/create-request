@@ -6,7 +6,7 @@ type Fetch = typeof window.fetch;
 /**
  * Options to do a request (`"url"` + `fetch`'s second argument).
  */
-export type RequestOptions = RequestInit & { url: string; };
+export type RequestOptions = RequestInit & { url: string };
 
 /**
  * Interceptors to handle request errors.
@@ -45,23 +45,22 @@ type RequestInterceptors = ErrorInterceptors & {
  * @param interceptors - Interceptors as a kind of protocol to handle requests.
  */
 const createRequest: {
-  (
-    fetch: Fetch,
-    interceptors?: ErrorInterceptors
-  ): (...params: [RequestOptions]) => Promise<Response>;
+  (fetch: Fetch, interceptors?: ErrorInterceptors): (
+    ...params: [RequestOptions]
+  ) => Promise<Response>;
 
   <R = Response>(
     fetch: Fetch,
     interceptors?: ErrorInterceptors & {
       onResponse: (response: Response) => R | PromiseLike<R>;
-    }
+    },
   ): (...params: [RequestOptions]) => Promise<R>;
 
   <A extends any[]>(
     fetch: Fetch,
     interceptors?: ErrorInterceptors & {
       onRequest: (...params: A) => RequestOptions;
-    }
+    },
   ): (...params: A) => Promise<Response>;
 
   <A extends any[], R = Response>(
@@ -69,33 +68,31 @@ const createRequest: {
     interceptors?: ErrorInterceptors & {
       onRequest: (...params: A) => RequestOptions;
       onResponse: (response: Response) => R | PromiseLike<R>;
-    }
+    },
   ): (...params: A) => Promise<R>;
 } = (
-  fetch: Fetch, {
+  fetch: Fetch,
+  {
     onError = (reason?: Error) => Promise.reject(reason),
     onRequest = (options: RequestOptions) => options,
     onRequestError = onError,
-    onResponse = (response: Response): Promise<Response> => Promise.resolve(response),
-    onResponseError = onError
-  }: RequestInterceptors = {}
+    onResponse = (response: Response): Promise<Response> =>
+      Promise.resolve(response),
+    onResponseError = onError,
+  }: RequestInterceptors = {},
 ) => {
   return function (): Promise<Response> {
-
     // `arguments` instead of `...args` to improve performance and reduce
     // bundle size. TS/Babel/Bublé don't need to transpile it.
-    const params = arguments as unknown as [RequestOptions];
+    const params = (arguments as unknown) as [RequestOptions];
 
     try {
-
       // `.apply(null, args)` instead of `(...args)` for same reason as above.
       const options = onRequest.apply(null, params);
 
-      return (
-        fetch(options.url, options)
-          .then(onResponse)
-          .catch(onResponseError)
-      );
+      return fetch(options.url, options)
+        .then(onResponse)
+        .catch(onResponseError);
     } catch (reason) {
       return onRequestError(reason);
     }
