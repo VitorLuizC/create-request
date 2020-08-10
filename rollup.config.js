@@ -6,7 +6,7 @@ import { terser } from 'rollup-plugin-terser';
  * @returns {import('rollup').OutputOptions}
  */
 const Option = (options) => ({
-  exports: 'named',
+  exports: 'default',
   sourcemap: true,
   ...options,
 });
