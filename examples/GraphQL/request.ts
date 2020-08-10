@@ -7,7 +7,7 @@ type GraphQLResponse = {
   }[];
 };
 
-const resolveMessage = (error: { message?: string }) => {
+const resolveMessage = (error: any) => {
   return (error && error.message) || 'Unknown error.';
 };
 

@@ -28,7 +28,7 @@ export type User = {
 
 export const getUser = async (id: number): Promise<User> => {
   const response = await request(query, { id: 1982891 });
-  if (!response.user) throw new Error(`There are no user with ID "${id}"`);
+  if (!response?.user) throw new Error(`There are no user with ID "${id}"`);
   return response.user as User;
 };
 

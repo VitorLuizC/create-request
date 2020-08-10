@@ -20,19 +20,19 @@ export interface ErrorInterceptors {
    * Handle request and response errors.
    * @param reason - Error reason, almost every time is an `Error` instance.
    */
-  onError?: (reason?: Error) => Promise<never>;
+  onError?: (reason: unknown) => Promise<never>;
 
   /**
    * Handle request errors. Overwrites `onError` handling request errors.
    * @param reason - Error reason, almost every time is an `Error` instance.
    */
-  onRequestError?: (reason?: Error) => Promise<never>;
+  onRequestError?: (reason: unknown) => Promise<never>;
 
   /**
    * Handle response errors. Overwrites `onError` handling response errors.
    * @param reason - Error reason, almost every time is an `Error` instance.
    */
-  onResponseError?: (reason?: Error) => Promise<never>;
+  onResponseError?: (reason: unknown) => Promise<never>;
 }
 
 /**
@@ -48,22 +48,6 @@ export interface RequestInterceptors extends ErrorInterceptors {
  * @param fetch - Yours environment Fetch function.
  * @param interceptors - Interceptors as a kind of protocol to handle requests.
  */
-export default function createRequest(
-  fetch: Fetch,
-  interceptors?: ErrorInterceptors,
-): (...params: [RequestOptions]) => Promise<Response>;
-export default function createRequest<R = Response>(
-  fetch: Fetch,
-  interceptors?: ErrorInterceptors & {
-    onResponse: (response: Response) => R | PromiseLike<R>;
-  },
-): (...params: [RequestOptions]) => Promise<R>;
-export default function createRequest<A extends any[]>(
-  fetch: Fetch,
-  interceptors?: ErrorInterceptors & {
-    onRequest: (...params: A) => RequestOptions;
-  },
-): (...params: A) => Promise<Response>;
 export default function createRequest<A extends any[], R = Response>(
   fetch: Fetch,
   interceptors?: ErrorInterceptors & {
@@ -71,10 +55,26 @@ export default function createRequest<A extends any[], R = Response>(
     onResponse: (response: Response) => R | PromiseLike<R>;
   },
 ): (...params: A) => Promise<R>;
+export default function createRequest<A extends any[]>(
+  fetch: Fetch,
+  interceptors?: ErrorInterceptors & {
+    onRequest: (...params: A) => RequestOptions;
+  },
+): (...params: A) => Promise<Response>;
+export default function createRequest<R = Response>(
+  fetch: Fetch,
+  interceptors?: ErrorInterceptors & {
+    onResponse: (response: Response) => R | PromiseLike<R>;
+  },
+): (...params: [RequestOptions]) => Promise<R>;
+export default function createRequest(
+  fetch: Fetch,
+  interceptors?: RequestInterceptors,
+): (...params: [RequestOptions]) => Promise<Response>;
 export default function createRequest(
   fetch: Fetch,
   {
-    onError = (reason?: Error) => Promise.reject(reason),
+    onError = (reason?: unknown) => Promise.reject(reason),
     onRequest = (options: RequestOptions) => options,
     onRequestError = onError,
     onResponse = (response: Response): Promise<Response> =>
