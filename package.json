@@ -1,6 +1,6 @@
 {
   "name": "@bitty/create-request",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "sideEffects": false,
   "description": "Apply interceptors in `fetch` to create a custom request functions.",
   "cdn": "dist/index.umd.min.js",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VitorLuizC/intereq.git"
+    "url": "git+https://github.com/VitorLuizC/create-request.git"
   },
   "author": {
     "url": "https://vitorluizc.github.io/",
@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/VitorLuizC/intereq/issues"
+    "url": "https://github.com/VitorLuizC/create-request/issues"
   },
   "keywords": [
     "fetch",
@@ -52,7 +52,7 @@
     "request-promise",
     "async"
   ],
-  "homepage": "https://github.com/VitorLuizC/intereq#readme",
+  "homepage": "https://github.com/VitorLuizC/create-request#readme",
   "devDependencies": {
     "prettier": "^2.0.5",
     "rollup": "^2.23.1",

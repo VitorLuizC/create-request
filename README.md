@@ -1,6 +1,6 @@
 # `@bitty/create-request`
 
-![License](https://badgen.net/github/license/VitorLuizC/intereq)
+![License](https://badgen.net/github/license/VitorLuizC/create-request)
 ![Library minified size](https://badgen.net/bundlephobia/min/@bitty/create-request)
 ![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/@bitty/create-request)
 
