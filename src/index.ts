@@ -55,22 +55,31 @@ export default function createRequest<A extends any[], R = Response>(
     onResponse: (response: Response) => R | PromiseLike<R>;
   },
 ): (...params: A) => Promise<R>;
+
 export default function createRequest<A extends any[]>(
   fetch: Fetch,
   interceptors?: ErrorInterceptors & {
     onRequest: (...params: A) => RequestOptions;
   },
 ): (...params: A) => Promise<Response>;
+
 export default function createRequest<R = Response>(
   fetch: Fetch,
   interceptors?: ErrorInterceptors & {
     onResponse: (response: Response) => R | PromiseLike<R>;
   },
 ): (...params: [RequestOptions]) => Promise<R>;
+
 export default function createRequest(
   fetch: Fetch,
   interceptors?: RequestInterceptors,
 ): (...params: [RequestOptions]) => Promise<Response>;
+
+/**
+ * Apply interceptors to `fetch` and create a custom request function.
+ * @param {Fetch} fetch - Yours environment Fetch function.
+ * @param {RequestInterceptors} [interceptors] - Interceptors as a kind of protocol to handle requests.
+ */
 export default function createRequest(
   fetch: Fetch,
   {
