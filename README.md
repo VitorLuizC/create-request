@@ -1,8 +1,8 @@
-# intereq
+# `@bitty/create-request`
 
 ![License](https://badgen.net/github/license/VitorLuizC/intereq)
-![Library minified size](https://badgen.net/bundlephobia/min/intereq)
-![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/intereq)
+![Library minified size](https://badgen.net/bundlephobia/min/@bitty/create-request)
+![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/@bitty/create-request)
 
 Apply interceptors to `fetch` and create a custom request function.
 
@@ -15,22 +15,22 @@ Apply interceptors to `fetch` and create a custom request function.
 This library is published in the NPM registry and can be installed using any compatible package manager.
 
 ```sh
-npm install intereq --save
+npm install @bitty/create-request --save
 
 # Use the command below if you're using Yarn.
-yarn add intereq
+yarn add @bitty/create-request
 ```
 
 ## Usage
 
-`intereq` is curry function, which applies interceptors to `fetch` and returns a new request function.
+`@bitty/create-request` is curry function, which applies interceptors to `fetch` and returns a new request function.
 
 ```ts
-import intereq from 'intereq';
+import createRequest from '@bitty/create-request';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
-const request = intereq(window.fetch, {
+const request = createRequest(window.fetch, {
   onRequest: (method: Method, route: string, data: any = undefined) => ({
     url: 'https://api.example.com' + route,
     body: JSON.stringify(data),
@@ -108,9 +108,9 @@ Older browsers don't support `Fetch API`, but you can use [`unfetch`](https://gi
 
 ```js
 import fetch from 'unfetch';
-import intereq from 'intereq';
+import createRequest from '@bitty/create-request';
 
-export default intereq(fetch, {
+export default createRequest(fetch, {
   onRequest: (options) => ({
     ...options,
     headers: {
@@ -128,9 +128,9 @@ Node environment does not provide global `fetch` function, but you can use [`nod
 
 ```js
 const fetch = require('node-fetch');
-const intereq = require('intereq');
+const createRequest = require('@bitty/create-request');
 
-module.exports = intereq(fetch, {
+module.exports = createRequest(fetch, {
   onResponse (response) {
     return response.json();
   }

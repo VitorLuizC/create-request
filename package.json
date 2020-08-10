@@ -1,7 +1,7 @@
 {
-  "name": "intereq",
+  "name": "@bitty/create-request",
   "version": "1.1.0",
-  "description": "Apply interceptors to `fetch` and create a custom request function.",
+  "description": "Apply interceptors in `fetch` to create a custom request functions.",
   "cdn": "dist/index.umd.min.js",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
