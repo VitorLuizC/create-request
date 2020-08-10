@@ -1,6 +1,7 @@
 {
   "name": "@bitty/create-request",
-  "version": "1.1.0",
+  "version": "1.0.0",
+  "sideEffects": false,
   "description": "Apply interceptors in `fetch` to create a custom request functions.",
   "cdn": "dist/index.umd.min.js",
   "main": "dist/index.js",
@@ -19,7 +20,8 @@
     "test": "pnpm run lint && echo \"Error: no test specified\" && exit 1",
     "build": "pnpm run build:transpile && pnpm run build:bundle",
     "build:transpile": "tsc --project ./tsconfig.build.json",
-    "build:bundle": "rollup --config rollup.config.js"
+    "build:bundle": "rollup --config rollup.config.js",
+    "prepublishOnly": "pnpm run lint && pnpm run build"
   },
   "repository": {
     "type": "git",
