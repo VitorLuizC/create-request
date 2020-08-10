@@ -7,14 +7,22 @@
 # Node.js modules.
 node_modules/
 
-# NPM's lockfile.
-# We're using Yarn and it provides it's own lockfile.
-npm-lockfile.json
+# Lockfiles of NPM and Yarn.
+# We're using PNPM and it provides it's own lockfile.
+package-lock.json
+npm-shrinkwrap.json‎
+yarn.lock
 
 # Log's files.
 *.log
 *.log.*
 
-# Generated source files.
+# Distribution sources
 dist/
-src/intereq.js
+
+# Generated type declarations.
+types/
+
+# Transpiled modules and their source-maps.
+src/**/*.js
+src/**/*.js.map
