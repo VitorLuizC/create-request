@@ -86,8 +86,7 @@ export default function createRequest(
     onError = (reason?: unknown) => Promise.reject(reason),
     onRequest = (options: RequestOptions) => options,
     onRequestError = onError,
-    onResponse = (response: Response): Promise<Response> =>
-      Promise.resolve(response),
+    onResponse = (response: Response) => Promise.resolve(response),
     onResponseError = onError,
   }: RequestInterceptors = {},
 ) {
