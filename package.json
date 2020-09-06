@@ -54,9 +54,9 @@
   ],
   "homepage": "https://github.com/VitorLuizC/create-request#readme",
   "devDependencies": {
-    "prettier": "^2.0.5",
-    "rollup": "^2.23.1",
-    "rollup-plugin-terser": "^7.0.0",
-    "typescript": "^3.9.7"
+    "prettier": "^2.1.1",
+    "rollup": "^2.26.10",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.0.2"
   }
 }
