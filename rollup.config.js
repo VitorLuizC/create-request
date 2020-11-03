@@ -27,6 +27,10 @@ const options = {
       format: 'esm',
     }),
     Option({
+      file: './dist/index.mjs',
+      format: 'esm',
+    }),
+    Option({
       file: './dist/index.umd.js',
       name: 'createRequest',
       format: 'umd',

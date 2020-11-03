@@ -3,13 +3,23 @@
   "version": "1.0.4",
   "sideEffects": false,
   "description": "Apply interceptors in `fetch` to create a custom request functions.",
-  "cdn": "dist/index.umd.min.js",
-  "main": "dist/index.js",
-  "types": "types/index.d.ts",
-  "unpkg": "dist/index.umd.min.js",
-  "module": "dist/index.esm.js",
-  "jsdelivr": "dist/index.umd.min.js",
-  "umd:main": "dist/index.umd.js",
+  "cdn": "./dist/index.umd.min.js",
+  "main": "./dist/index.js",
+  "types": "./types/index.d.ts",
+  "unpkg": "./dist/index.umd.min.js",
+  "module": "./dist/index.esm.js",
+  "jsdelivr": "./dist/index.umd.min.js",
+  "umd:main": "./dist/index.umd.js",
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js",
+        "default": "./dist/index.js"
+      },
+      "./dist/index.js"
+    ]
+  },
   "files": [
     "dist/",
     "types/"
