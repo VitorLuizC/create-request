@@ -1,6 +1,6 @@
 {
   "name": "@bitty/create-request",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "sideEffects": false,
   "description": "Apply interceptors in `fetch` to create a custom request functions.",
   "cdn": "./dist/index.umd.min.js",
