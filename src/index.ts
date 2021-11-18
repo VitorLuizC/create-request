@@ -93,7 +93,7 @@ export default function createRequest(
   return function (): Promise<Response> {
     // `arguments` instead of `...args` to improve performance and reduce
     // bundle size. TS/Babel/Bublé don't need to transpile it.
-    const params = (arguments as unknown) as [RequestOptions];
+    const params = arguments as unknown as [RequestOptions];
 
     try {
       // `.apply(null, args)` instead of `(...args)` for same reason as above.
