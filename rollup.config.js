@@ -1,4 +1,4 @@
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 
 /**
  * Creates an output options object.
